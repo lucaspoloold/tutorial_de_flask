@@ -1,7 +1,7 @@
 from flask import Flask
-from talkshow.ext import cli, bootstrap, admin
+from talkshow.ext import cli, bootstrap, admin, apidocs
 from talkshow.ext import db
-from talkshow.blueprints import webui
+from talkshow.blueprints import webui, restapi
 
 
 def create_app():
@@ -15,8 +15,10 @@ def create_app():
     cli.configure(app)
     bootstrap.configure(app)
     admin.configure(app)
+    apidocs.configure(app)
 
     #blueprints
     webui.configure(app)
+    restapi.configure(app)
 
     return app
