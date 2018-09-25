@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flask import current_app as app
 from flask_restful import Api, Resource, reqparse
+from flask_simplelogin import login_required
 
 bp = Blueprint('restapi', __name__, url_prefix='/api/v1')
 api = Api(bp)
@@ -15,6 +16,7 @@ class Event(Resource):
     def get(self):
         return {'events': list(app.db['events'].find())}
 
+    @login_required(basic=True)
     def post(self):
         """Creates new event
         ---
